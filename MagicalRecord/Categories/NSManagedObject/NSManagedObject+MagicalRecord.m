@@ -293,7 +293,7 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
 
 - (id) MR_inContext:(NSManagedObjectContext *)otherContext
 {
-    NSError *error = nil;
+    __block NSError *error = nil;
     
     if ([[self objectID] isTemporaryID])
     {
