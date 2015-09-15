@@ -287,7 +287,7 @@ NSString * const kMagicalRecordImportAttributeUseDefaultValueWhenNotPresent = @"
                                   }
                                   else if (localObjectData)
                                   {
-                                      NSString *relatedByAttribute = [[relationshipInfo userInfo] objectForKey:kMagicalRecordImportRelationshipLinkedByKey] ?: MR_primaryKeyNameFromString([[relationshipInfo destinationEntity] name]);
+                                      NSString *relatedByAttribute = [relationshipInfo MR_primaryKey];
 
                                       if (relatedByAttribute)
                                       {
