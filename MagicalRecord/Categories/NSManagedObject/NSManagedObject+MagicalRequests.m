@@ -147,7 +147,16 @@
               sortKey = sortComponents[0];
           }
       
-        NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:sortKey ascending:ascending];
+        NSDictionary *attributes = [request.entity attributesByName];
+        NSAttributeDescription *sortAttribute = [attributes objectForKey:sortKey];
+        NSSortDescriptor *sortDescriptor;
+        
+        if (sortAttribute.attributeType == NSStringAttributeType) {
+            sortDescriptor = [[NSSortDescriptor alloc] initWithKey:sortKey ascending:ascending selector:@selector(localizedCaseInsensitiveCompare:)];
+        } else {
+            sortDescriptor = [[NSSortDescriptor alloc] initWithKey:sortKey ascending:ascending];
+        }
+        
         [sortDescriptors addObject:sortDescriptor];
     }
     
